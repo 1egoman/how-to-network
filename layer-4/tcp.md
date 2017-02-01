@@ -6,6 +6,14 @@ TCP provides reliable, ordered, and error-checked delivery of a stream of octets
 
 `CIDR Block`
 
+`ICMP` / `TCP` / `UDP`
+
+`ports`
+
+`listening on a port`
+
+`network interfaces
+
 # Tools
 
 ### `nc` - netcat lets you send or receive arbitrary data over tcp.
@@ -32,9 +40,7 @@ $ nmap -sn 192.168.1.0/24
 $ 
 ```
 
-### `netstat` - 
-
-### `ngrep` - search through the content of all tcp requests that touch a machine and search for a phrase inside them.
+### `ngrep` - search through the content of all tcp requests that touch a machine and search through them.
 
 Format of each entry:
 ```
@@ -82,5 +88,60 @@ $ sudo ngrep -d eth0 example.com
 
 Also, it's good to know that ngrep takes it's filter in [Berkley packet format](https://biot.com/capstats/bpf.html). Not necisarily required to use the tool, but a good thing to know.
 
+### `ping`: Send a ICMP ping to a given host, and look for a response.
 
-### `tcpdump`
+Example:
+```bash
+$ ping google.com
+PING google.com (172.217.1.78): 56 data bytes
+64 bytes from 172.217.1.78: icmp_seq=0 ttl=55 time=13.503 ms
+64 bytes from 172.217.1.78: icmp_seq=1 ttl=55 time=13.644 ms
+^C
+--- google.com ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 13.503/13.573/13.644/0.071 ms
+```
+
+Send five pings, then display ping statistics.
+```bash
+$ ping -c 5 google.com
+PING google.com (172.217.6.206): 56 data bytes
+64 bytes from 172.217.6.206: icmp_seq=0 ttl=54 time=13.493 ms
+64 bytes from 172.217.6.206: icmp_seq=1 ttl=54 time=12.712 ms
+64 bytes from 172.217.6.206: icmp_seq=2 ttl=54 time=12.952 ms
+64 bytes from 172.217.6.206: icmp_seq=3 ttl=54 time=13.592 ms
+64 bytes from 172.217.6.206: icmp_seq=4 ttl=54 time=13.068 ms
+
+--- google.com ping statistics ---
+5 packets transmitted, 5 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 12.712/13.163/13.592/0.332 ms
+```
+
+Ping via a specified network interface: helps answer the question *Is a network interface up?*
+```bash
+$ ping -I eth0 google.com
+64 bytes from 172.217.6.206: icmp_seq=0 ttl=54 time=14.014 ms
+64 bytes from 172.217.6.206: icmp_seq=1 ttl=54 time=12.508 ms
+...
+```
+
+Those are the ones I use most commonly!
+
+### `tcpdump` - View all trafic over the network
+
+```bash
+sudo tcpdump port 80 -w capture.pcap
+```
+
+
+# Still figuring out myself.....
+
+
+### `netstat` - Show information network statistics and activity
+
+**NOTE: I haven't figured this one out yet.**
+
+This tool has a ton of flags to change what it displays:
+- `-t`: Show tcp requests
+- `-u`: Show udp requests
+
