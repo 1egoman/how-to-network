@@ -10,7 +10,7 @@ TCP provides reliable, ordered, and error-checked delivery of a stream of octets
 
 `ports`
 
-`listening on a port`
+`listening on a port` / `receiving on a port`
 
 `network interfaces
 
@@ -132,6 +132,12 @@ Those are the ones I use most commonly!
 ```bash
 sudo tcpdump port 80 -w capture.pcap
 ```
+
+A few flags that would be good to know:
+- `-X`: Show packet contents in acii / hex (ala hexdump)
+- `-n`: tells tcpdump to auto-resolve domain names to ips
+- `--nn`: tells tcpdump to auto-resolve ports to their numerical equivelents. For some reason, by default, addresses are like `1.2.3.4.http` when they really mean `1.2.3.4:80`. This flag makes that happen.
+- `-s`: The amount of the body to display of the packet.
 
 
 # Still figuring out myself.....
