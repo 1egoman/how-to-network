@@ -37,7 +37,11 @@ Example:
 Scan for all available ips that match a given CIDR block.
 ```bash
 $ nmap -sn 192.168.1.0/24
-$ 
+```
+
+Scan for all ips with the given ip open:
+```bash
+$ nmap -p 22 192.168.1.0/24
 ```
 
 ### `ngrep` - search through the content of all tcp requests that touch a machine and search through them.
